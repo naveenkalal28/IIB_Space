@@ -1,0 +1,57 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "GetDetails",
+    "version" : "1.0.0",
+    "description" : "GetDetails"
+  },
+  "paths" : {
+    "/getDetails" : {
+      "get" : {
+        "operationId" : "getGetDetails",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve getDetails",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "type" : "string"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "type" : "string"
+        } ]
+      }
+    },
+    "/insertData" : {
+      "post" : {
+        "operationId" : "postInsertData",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a insertData",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        } ]
+      }
+    }
+  },
+  "basePath" : "/getdetails/v1"
+}

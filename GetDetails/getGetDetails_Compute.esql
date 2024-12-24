@@ -1,0 +1,22 @@
+
+
+CREATE COMPUTE MODULE getGetDetails_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE id,name CHARACTER;
+		
+		DECLARE inref2 REFERENCE TO  InputRoot.JSON.Data;
+		SET id=InputLocalEnvironment.REST.Input.Parameters.id;
+		SET name=InputLocalEnvironment.REST.Input.Parameters.name;
+		
+		DECLARE a Row;
+		SET a.Nav[] =PASSTHRU('SELECT * FROM CUSTOMERDATA WHERE CUSTOMER_ID=? AND FULL_NAME=?' VALUES (id,name));
+
+	END;
+END MODULE;

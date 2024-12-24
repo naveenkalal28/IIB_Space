@@ -1,0 +1,25 @@
+
+
+CREATE COMPUTE MODULE postInsertData_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+				
+		DECLARE inref2 REFERENCE TO  InputRoot.JSON.Data.Data1;
+		
+		--SET id=InputLocalEnvironment.REST.Input.Parameters.id;
+		--SET name=InputLocalEnvironment.REST.Input.Parameters.name;
+		
+		DECLARE a Row;
+		         
+		
+		insert into Database.SYSTEM.CUSTOMERDATA values(inref2.CUSTOMER_ID,inref2.FULL_NAME,inref2.DATE_OF_BIRTH,inref2.PAN_NO,inref2.ADDRESS,inref2.PHONE_NUMBER,inref2.EMAIL);
+		
+		--SET OutputRoot = InputRoot;
+	END;
+END MODULE;

@@ -1,0 +1,29 @@
+
+
+CREATE COMPUTE MODULE msgFlow1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	CALL CopyEntireMessage();
+
+        RETURN TRUE;  
+
+	END;
+
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE outMessage REFERENCE TO OutputRoot.XMLNSC.Data.ISO8583;
+    
+    -- Create the response message structure
+    SET outMessage.MTI = '0210';  -- MTI for response
+    SET outMessage.Bitmap = '1234567890ABCDEF';  -- Example Bitmap
+    SET outMessage.DataElement2 = '1234567890123456';  -- Card Number
+    SET outMessage.DataElement4 = '1000';  -- Transaction Amount
+    SET outMessage.DataElement7 = '202408272359';  -- Transmission Date and Time
+    SET outMessage.DataElement11 = '123456';  -- Trace Number
+    SET outMessage.DataElement39 = '00';  -- Response Code (00 for successful)
+    
+
+	END;
+END MODULE;
+
