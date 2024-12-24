@@ -1,0 +1,44 @@
+
+DECLARE text,TEXT1 row;
+DECLARE res CHARACTER;
+CREATE COMPUTE MODULE SoapTransferAttachments_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		--set text=InputRoot.SOAP.Attachment.AttachmentText.BLOB.BLOB;
+	--SET OutputRoot=InputRoot;
+	--set text =InputRoot.SOAP.*[4].[1].[2].[1];
+	--SET TEXT1 = text.*[1].[2];
+	--set res=cast(text AS CHARACTER CCSID 1208 ENCODING  546);
+	
+DECLARE attachRef REFERENCE TO InputRoot.SOAP.Attachment.*[1];-- Point to the first attachment
+DECLARE contentID CHARACTER; 
+DECLARE attachmentData BLOB;
+
+-- Loop through the attachments
+WHILE LASTMOVE(attachRef) DO
+    SET contentID = FIELDVALUE(attachRef."Content-ID");
+    
+    -- Check if this is the attachment you're looking for
+  --  IF contentID = 'AttachmentText.txt' THEN
+        -- Extract the binary data of the attachment
+        SET attachmentData = FIELDVALUE(attachRef.*[2]);
+        
+        -- Convert binary data to text (assuming it's a text file)
+        DECLARE attachmentText CHAR;
+        SET attachmentText = CAST(attachmentData AS CHAR CCSID 1208);
+        
+        -- Log or use the text content (for demonstration, we just write to the log)
+        --CALL LogMessage(attachmentText);  -- Replace this with actual logic as needed
+   -- END IF;
+    
+    -- Move to the next attachment
+    MOVE attachRef NEXTSIBLING;
+END WHILE;
+	
+	END;
+END MODULE;
