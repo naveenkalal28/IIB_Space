@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://example.com/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/webservices">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="one1_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="UploadFileBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+    
+  <wsdl:types>
+        
+          
+    <xsd:schema xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" targetNamespace="http://example.com/webservices">
+      
+      <xsd:include schemaLocation="one1_InlineSchema1.xsd"/>
+    </xsd:schema>
+        
+  </wsdl:types>
+    
+  <wsdl:message name="UploadFileRequestMessage">
+        
+    <wsdl:part element="tns:UploadFileRequest" name="parameters"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="UploadFileResponseMessage">
+        
+    <wsdl:part element="tns:UploadFileResponse" name="parameters"/>
+      
+  </wsdl:message>
+    
+  <wsdl:portType name="UploadFilePortType">
+        
+    <wsdl:operation name="UploadFile">
+            
+      <wsdl:input message="tns:UploadFileRequestMessage"/>
+            
+      <wsdl:output message="tns:UploadFileResponseMessage"/>
+          
+    </wsdl:operation>
+      
+  </wsdl:portType>
+    
+  <wsdl:binding name="UploadFileBinding" type="tns:UploadFilePortType">
+        
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+    <wsdl:operation name="UploadFile">
+            
+      <soap:operation soapAction="UploadFile"/>
+            
+      <wsdl:input>
+                
+        <soap:body use="literal"/>
+              
+      </wsdl:input>
+            
+      <wsdl:output>
+                
+        <soap:body use="literal"/>
+              
+      </wsdl:output>
+          
+    </wsdl:operation>
+      
+  </wsdl:binding>
+    
+  <wsdl:service name="UploadFileService">
+        
+    <wsdl:port binding="tns:UploadFileBinding" name="UploadFilePort">
+            
+      <soap:address location="http://localhost:7800/UploadFile"/>
+          
+    </wsdl:port>
+      
+  </wsdl:service>
+  
+</wsdl:definitions>
