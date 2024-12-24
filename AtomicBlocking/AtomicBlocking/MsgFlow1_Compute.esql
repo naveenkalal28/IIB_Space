@@ -1,0 +1,25 @@
+BROKER SCHEMA AtomicBlocking
+
+DECLARE a SHARED INTEGER 1;
+DECLARE b SHARED INTEGER 1;
+CREATE COMPUTE MODULE MsgFlow1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		x:BEGIN ATOMIC 
+			
+			SET a=a+1;
+			SET OutputRoot.JSON.Data.Res.a1 = a;
+		
+		END;
+		
+		SET b=b+1;
+		
+		SET OutputRoot.JSON.Data.Res.b1 = b;
+	END;
+END MODULE;
