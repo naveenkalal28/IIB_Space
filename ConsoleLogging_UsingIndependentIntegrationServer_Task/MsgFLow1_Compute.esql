@@ -1,0 +1,20 @@
+CREATE COMPUTE MODULE MsgFLow1_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot.JSON.Data.Customer = InputRoot.JSON.Data.Customer;
+		DECLARE a CHARACTER;
+		SET a = CAST(AsbitStream(InputRoot.JSON.Data.Customer.FullName) AS CHARACTER CCSID 1208 ENCODING 546);
+		DECLARE b CHARACTER;
+		SET b = CAST(AsbitStream(OutputRoot.JSON.Data.Customer.FullName) AS CHARACTER CCSID 1208 ENCODING 546);
+		LOG EVENT VALUES(a,1254,'kalal Naveen kumar goud', b);
+		LOG EVENT FULL EXCEPTION VALUES ('klkolb');
+		LOG EVENT SEVERITY 1 CATALOG 'BIPmsgs' MESSAGE 2957 VALUES(1,2,3,'ths a bloody exception guys ');
+		--SET OutputRoot = InputRoot;
+	END;
+END MODULE;
