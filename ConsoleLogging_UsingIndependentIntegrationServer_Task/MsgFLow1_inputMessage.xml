@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MessagePool xmlns="http://wwww.ibm.com/iib/test/1.0.0">
+    <InputMessage timestamp="1722507736359" nodeId="FCMComposite_1_1" name="new message 1" id="1722507736359-6">
+        <plainText>%3Croot%3E%0D%0A++++%3Cf%3E1%3C%2Ff%3E%0D%0A%3C%2Froot%3E</plainText>
+    </InputMessage>
+</MessagePool>

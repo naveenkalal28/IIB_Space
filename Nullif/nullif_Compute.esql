@@ -1,0 +1,27 @@
+
+
+CREATE COMPUTE MODULE nullif_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		DECLARE a,b INTEGER;
+		SET a=3;
+		SET b=4;
+		DECLARE c CHARACTER;
+		SET c = 'kalal Naveen kumar goud';
+		
+		
+		Declare ret BOOLEAN;
+		--SET ret = SLEEP(10000);
+		--NULLIF(a,b)        
+		--"Base64Decode": "91a95a94d6af79e9e4ba66ab828b9d",
+        --"Base64Encode": "kalalNaveenkumargoud"
+		
+		SET OutputRoot.JSON.Data.Result.Base64Decode = BASE64DECODE(c);
+		SET OutputRoot.JSON.Data.Result.Base64Encode = BASE64ENCODE(OutputRoot.JSON.Data.Result.Base64Decode);
+	END;
+END MODULE;
